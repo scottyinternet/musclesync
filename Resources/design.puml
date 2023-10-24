@@ -1,0 +1,73 @@
+@startuml
+
+class Trainer {
+    - clients : List<Clients>
+}
+
+class Client {
+    - info : ClientInfo
+    - functionalProfiles : List<FunctionalProfile>
+    - programs : List<Program>
+}
+
+class ClientInfo {
+    - name : String
+    - phoneNumber : String
+    - email : String
+}
+class FunctionalProfile {
+    - functionalSystemStates : List<FunctionSystemState>
+}
+class FunctionalAssessment {
+    functionalSystems : List<FunctionalSystem>
+    List<FunctionalSystemsResults>
+}
+class FunctionalSystem {
+    - name : String
+    - primaryTest : Test
+    - secondaryTests : List<Test>
+    - primaryState : String
+    - secondaryResults : List<Strings>
+}
+
+class Test {
+    - name : String
+    - description : String
+    - result : int
+}
+class FunctionSystemState {
+
+}
+
+Trainer -- Client
+Client - ClientInfo
+Client -- FunctionalProfile
+Client -- Program
+FunctionalAssessment -- FunctionalSystem
+FunctionalSystem -- Test
+FunctionalProfile -- FunctionSystemState
+
+' ----------------------------------- `
+
+class Program {
+    - workouts : List<Workout>
+    - assignedWeek : LocalDate
+}
+
+class Workout {
+    - exercises : List<Exercisee>
+    - assignedDays : List<LocalDates>
+}
+class Exercise {
+    - name : String
+    - description : String
+    - media : String
+    - functionalSystemStateId : String
+    - level : int
+    - progression : Exercise
+    - regression : Exercise
+}
+Program -- Workout
+Workout -- Exercise
+
+@enduml
