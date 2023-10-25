@@ -1,12 +1,63 @@
 @startuml
+class App {
+}
+App --- FunctionalAssessment
+App -- Trainer
+
+class FunctionalAssessment {
+    functionalSystems : List<FunctionalSystem>
+    previousResults : List<FunctionalAssessmentResult>
+}
+class FunctionalSystem {
+    - name : String
+    - primaryTest : Test
+    - secondaryTests : List<Test>
+}
+
+class Test {
+    - name : String
+    - testId : String
+    - description : String
+    - media : String
+    - possibleStates : List<Strings>
+}
+class FunctionalProfile {
+    assessmentResults : List<FunctionalAssessmentResult>
+    currentFunctionalStates : List<FunctionalSystemResult>
+
+}
+
+class FunctionalAssessmentResult {
+    functionalAssessmentId : String
+    date : LocalDateTime
+    primaryTestResult : TestResult
+    secondaryTestResults : List<TestResult>
+}
+class FunctionalSystemResult {
+   - primaryTestResult : TestResult
+   - secondaryTestResults : List<TestResults>
+   - secondaryCompensationPatterns : List<String>
+}
+class TestResult {
+    - name : String
+    - testId : String
+    - result : int
+    - state : String
+    - notes : String
+}
+FunctionalProfile -- FunctionalAssessmentResult
+FunctionalAssessmentResult -- FunctionalSystemResult
+FunctionalSystemResult --TestResult
+
 
 class Trainer {
+    - trainerInfo : TrainerInfo
     - clients : List<Clients>
 }
 
 class Client {
     - info : ClientInfo
-    - functionalProfiles : List<FunctionalProfile>
+    - functionalProfile : FunctionalProfile
     - programs : List<Program>
 }
 
@@ -15,37 +66,13 @@ class ClientInfo {
     - phoneNumber : String
     - email : String
 }
-class FunctionalProfile {
-    - functionalSystemStates : List<FunctionSystemState>
-}
-class FunctionalAssessment {
-    functionalSystems : List<FunctionalSystem>
-    List<FunctionalSystemsResults>
-}
-class FunctionalSystem {
-    - name : String
-    - primaryTest : Test
-    - secondaryTests : List<Test>
-    - primaryState : String
-    - secondaryResults : List<Strings>
-}
-
-class Test {
-    - name : String
-    - description : String
-    - result : int
-}
-class FunctionSystemState {
-
-}
 
 Trainer -- Client
 Client - ClientInfo
-Client -- FunctionalProfile
+FunctionalProfile - Client
 Client -- Program
 FunctionalAssessment -- FunctionalSystem
 FunctionalSystem -- Test
-FunctionalProfile -- FunctionSystemState
 
 ' ----------------------------------- `
 
