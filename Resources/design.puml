@@ -1,0 +1,100 @@
+@startuml
+class App {
+}
+App --- FunctionalAssessment
+App -- Trainer
+
+class FunctionalAssessment {
+    functionalSystems : List<FunctionalSystem>
+    previousResults : List<FunctionalAssessmentResult>
+}
+class FunctionalSystem {
+    - name : String
+    - primaryTest : Test
+    - secondaryTests : List<Test>
+}
+
+class Test {
+    - name : String
+    - testId : String
+    - description : String
+    - media : String
+    - possibleStates : List<Strings>
+}
+class FunctionalProfile {
+    assessmentResults : List<FunctionalAssessmentResult>
+    currentFunctionalStates : List<FunctionalSystemResult>
+
+}
+
+class FunctionalAssessmentResult {
+    functionalAssessmentId : String
+    date : LocalDateTime
+    primaryTestResult : TestResult
+    secondaryTestResults : List<TestResult>
+}
+class FunctionalSystemResult {
+   - primaryTestResult : TestResult
+   - secondaryTestResults : List<TestResults>
+   - secondaryCompensationPatterns : List<String>
+}
+class TestResult {
+    - name : String
+    - testId : String
+    - result : int
+    - state : String
+    - notes : String
+}
+FunctionalProfile -- FunctionalAssessmentResult
+FunctionalAssessmentResult -- FunctionalSystemResult
+FunctionalSystemResult --TestResult
+
+
+class Trainer {
+    - trainerInfo : TrainerInfo
+    - clients : List<Clients>
+}
+
+class Client {
+    - info : ClientInfo
+    - functionalProfile : FunctionalProfile
+    - programs : List<Program>
+}
+
+class ClientInfo {
+    - name : String
+    - phoneNumber : String
+    - email : String
+}
+
+Trainer -- Client
+Client - ClientInfo
+FunctionalProfile - Client
+Client -- Program
+FunctionalAssessment -- FunctionalSystem
+FunctionalSystem -- Test
+
+' ----------------------------------- `
+
+class Program {
+    - workouts : List<Workout>
+    - assignedWeek : LocalDate
+}
+
+class Workout {
+    - exercises : List<Exercisee>
+    - assignedDays : List<LocalDates>
+}
+class Exercise {
+    - name : String
+    - description : String
+    - media : String
+    - functionalSystemStateId : String
+    - level : int
+    - progression : Exercise
+    - regression : Exercise
+}
+Program -- Workout
+Workout -- Exercise
+
+@enduml
