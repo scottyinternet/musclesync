@@ -30,18 +30,17 @@ MuscleSync is built to help personal trainers create more personalized workout p
 ![design.png](design images/design.png)
 
 ---
-## Tables
-_RDS might make more sense than DynamoDB)_
-### App Wide Tables
+## App Tables
 ##### Exercises Table
 - pk : functionalSystemState (S)
 - sk : name (S)
+##### Tests Tab le
+- pk : functionalSystem
+- sk : name (S)
 ##### FunctionalSystems Table
 - pk : name (S)
-##### Assessments Table
-- pk : assessmentId (S)
 
-### User Tables
+## User Tables
 ##### Clients Table
 - pk : trainerId (S)
 - sk : clientName (S)
@@ -54,12 +53,9 @@ _RDS might make more sense than DynamoDB)_
 ##### Programs Table
 - pk : clientId (S)
 - sk : date (S)
-- Workouts
-- Exercises
+- List<Workouts>
+  - List<Exercises>
 
-- A list of DynamoDB tables and global secondary indexes.
-    - Each item must include the partition and sort key (if applicable) and all other attributes
-    - When listing attributes, you must include its name and DynamoDB type
 ---
 
 ## EndPoints
@@ -79,13 +75,27 @@ _RDS might make more sense than DynamoDB)_
 ---
 
 ## Mockups
+
+![MuscleSync Overview.png](design%20images%2FMuscleSync%20Overview.png)
+
 ### Home Page
+
+![MuscleSync Home.png](design%20images%2FMuscleSync%20Home.png)
+
 ### Client Page
+
+![MuscleSync Client.png](design%20images%2FMuscleSync%20Client.png)
+
 ### Functional Assessment Input Form 
-![assessmentForm.png](design%20images%2FassessmentForm.png)
+
+![MuscleSync Assessment.png](design%20images%2FMuscleSync%20Assessment.png)
+
 ### Workout Builder
+
+![MuscleSync Workout.png](design%20images%2FMuscleSync%20Workout.png)
 
 ---
 
 ## Other AWS Services
-- RDS possibly
+- RDS for app wide tables
+- React for front end
