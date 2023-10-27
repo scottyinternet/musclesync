@@ -1,0 +1,72 @@
+/* Button Styles */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF; /* Primary button color */
+    color: #fff; /* Text color */
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    /* Add a subtle shadow for depth */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Button Hover State */
+  .button:hover {
+    background-color: #0056b3; /* Darker color on hover */
+  }
+  
+  /* Button Active State (when clicked) */
+  .button:active {
+    background-color: #003D80; /* Even darker color when clicked */
+  }
+  
+  /* Center the text inside the button */
+  .button span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+  }
+  
+  /* Icon Styles (if you want to add an icon inside the button) */
+  .button i {
+    margin-right: 8px;
+  }
+
+.slider-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.option {
+  width: 30px;
+  font-size: 10px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.value-readout {
+  font-size: 16px; /* Increase font size for better visibility */
+  margin-right: 8px; /* Add some margin for spacing */
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+.snap-button {
+  margin-top: 8px; /* Add margin to separate the button from the slider */
+}
