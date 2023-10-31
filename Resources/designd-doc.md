@@ -26,8 +26,11 @@ MuscleSync is built to help personal trainers create more personalized workout p
 ---
 
 ## UML Diagram
-
+### Models
 ![MuscleSync puml.png](design%20images%2FMuscleSync%20puml.png)
+
+### Activites
+![activities.png](design%20images%2Factivities.png)
 
 ---
 ## App Tables
@@ -68,10 +71,232 @@ MuscleSync is built to help personal trainers create more personalized workout p
     - Request body (if applicable)
     - Response body
     - A description of any errors the endpoint might return
----
+### 1. NewClient
+- Description: User can create a new client 
+- HTTP Method: `POST`
+- Path: `/client`
+- Request Body:
+```
+{
+  "name": "Jane Doe",
+  "dob" : "1988-12-27"
+  "email": "scott@fakemail.com",
+  "phone": "123-456-7890"
+  "pregnancyHistory":[
+      {
+        "status": "pregnant",
+        "date": "2024-02-23"
+        "gender": "female",
+        "notes": ""
+      },
+      {
+        "status": "natural-birth",
+        "date": "2021-09-01"
+        "gender": "male",
+        "notes": ""
+      },
+      {
+        "status": "c-section",
+        "date": "2029-02-14"
+        "gender": "male",
+        "notes": ""
+      }       
+    ]
+  }
+```
+- Response
+```
+{
+    "status": "success",
+    "message": "Client successfully created",
+}
+```
 
-## Sequence Diagram
-- A UML sequence diagram of the process of at least one endpoint
+### 2. UpdateClient
+- Description: User can update client info
+- HTTP Method: `PUT`
+- Path: `/client/{client-id}`
+- Request Body:
+```
+{
+  "name": "Jane Doe",
+  "dob" : "1988-12-27"
+  "email": "scott@fakemail.com",
+  "phone": "123-456-7890"
+  "pregnancyHistory":[
+      {
+        "status": "pregnant",
+        "date": "2024-02-23"
+        "gender": "female",
+        "notes": ""
+      },
+      {
+        "status": "natural-birth",
+        "date": "2021-09-01"
+        "gender": "male",
+        "notes": ""
+      },
+      {
+        "status": "c-section",
+        "date": "2029-02-14"
+        "gender": "male",
+        "notes": ""
+      }       
+    ]
+  }
+```
+- Response
+```
+{
+    "status": "success",
+    "message": "Client successfully created",
+}
+```
+
+### 3. GetClient
+- Description: User can get client and all clients details
+- HTTP Method: `GET`
+- Path: `/client/(client_id}`
+- Response
+```
+  "name": "Jane Doe",
+  "dob" : "1988-12-27"
+  "email": "jane@fakemail.com",
+  "phone": "123-456-7890"
+  "pregnancyHistory":[
+      {
+        "status": "pregnant",
+        "date": "2024-02-23"
+        "gender": "female",
+        "notes": ""
+      },
+      {
+        "status": "natural-birth",
+        "date": "2021-09-01"
+        "gender": "male",
+        "notes": ""
+      },
+      {
+        "status": "c-section",
+        "date": "2029-02-14"
+        "gender": "male",
+        "notes": ""
+      }       
+    ]
+  "functionalProfile": [
+        {
+          "functionalSystem": "Shoulder ROM",
+          "funtionalSystemState": "Limited Interal",
+          "secondaryCompensations": "Limted External"
+        }, 
+        {
+          "functionalSystem": "Hip ROM",
+          "funtionalSystemState": "Limited Interal",
+          "secondaryCompensations": ""
+        }
+      ] 
+  }
+```
+
+### 4. DeleteClient
+- Description: User can delete client and all clients details
+- HTTP Method: `DELETE`
+- Path: `/client/(client_id}`
+- Response
+```
+{
+    "status": "success",
+    "message": "Client successfully deleted",
+}
+```
+
+### 5. SaveNewAssessment
+- Description: User can run a new assessment using a form in the front end and save the results to the database.
+- HTTP Method: `POST`
+- Path: `/assessments`
+- Request Body
+```
+{
+  "clientId": "089732450712",
+  "date": "2023-01-01", 
+  "functionalSystemTestResults":[
+       {
+        "functionalSystem": "ISA",
+        "notes": " ... ",
+        "primaryTestId": "0000",
+        "primaryTestMeasurement": "+74",
+        "secondaryTests": [
+            {
+              "testId":"0001",
+              "testMeasurement":"+75"      
+            },
+            {
+              "testId":"0002",
+              "testMeasurement":"-22"   
+            },          
+            {
+              "testId":"0003",
+              "testMeasurement":"-45"      
+            }
+          ]
+        }, 
+        
+        {
+          "functionalSystem": "Shoulder ROM",
+          "notes": " ... ",
+          "primaryTestId": "1000",
+          "primaryTestMeasurement": "-90",
+          "secondaryTests": [
+            {
+              "testId":"1001",
+              "testMeasurement":"-60"      
+            },
+            {
+              "testId":"1002",
+              "testMeasurement":"-50"   
+            }
+          ]
+        }, 
+        
+        {
+          "functionalSystem": "Hip ROM",
+          "notes": " ... ",
+          "primaryTestId": "2000",
+          "primaryTestMeasurement": "-90",
+          "secondaryTests": [
+            {
+              "testId":"2001",
+              "testMeasurement":"-60"      
+            },
+            {
+              "testId":"2002",
+              "testMeasurement":"-50"   
+            }
+          ]
+        }
+      ]
+    }
+```
+- Response
+```
+{
+    "status": "success",
+    "message": "Assessment successfully saved",
+}
+```
+
+### 6. DeleteAssessment
+- Description: User can delete an assessment from database.
+- HTTP Method: `DELETE`
+- Path: `/assessments/{assessment_id}`
+- Response
+```
+{
+    "status": "success",
+    "message": "Assessment successfully deleted",
+}
+```
+
 ---
 
 ## Mockups
@@ -95,7 +320,3 @@ MuscleSync is built to help personal trainers create more personalized workout p
 ![MuscleSync Workout.png](design%20images%2FMuscleSync%20Workout.png)
 
 ---
-
-## Other AWS Services
-- RDS for app wide tables
-- React for front end

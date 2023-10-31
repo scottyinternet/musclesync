@@ -1,0 +1,44 @@
+
+@startuml
+'  A C T I V I T I E S  '
+class NewClientActivity
+NewClientActivity --- clientDao
+
+class UpdateClientActivity
+UpdateClientActivity --- clientDao
+
+class GetClientActivity
+GetClientActivity --- assessmentDao
+GetClientActivity --- clientDao
+
+class DeleteClientActivity
+DeleteClientActivity --- assessmentDao
+DeleteClientActivity --- clientDao
+
+class SaveAssessmentActivity
+SaveAssessmentActivity --- assessmentDao
+
+class DeleteAssessmentActivity
+DeleteAssessmentActivity --- assessmentDao
+
+
+class clientDao {
+}
+class assessmentDao {
+}
+
+clientDao -- DynamoDB
+assessmentDao -- DynamoDB
+
+
+package DynamoDB <<Database>> {
+}
+
+node ClientsTable {
+}
+node AssessmentsTable {
+}
+DynamoDB -- ClientsTable
+DynamoDB -- AssessmentsTable
+
+@enduml

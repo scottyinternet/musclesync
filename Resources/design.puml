@@ -1,4 +1,7 @@
 @startuml
+
+
+' A P P '
 class App {
 }
 App --- FunctionalAssessment
@@ -78,12 +81,25 @@ FunctionalSystem -- Test
 
 class Program {
     - workouts : List<Workout>
-    - assignedWeek : LocalDate
+    - programFlow : ProgramFlow
 }
 
+class ProgramFlow {
+"defines assigned days for workouts, rest days etc"
+"essentially the schedule for the week"
+}
+
+Program - ProgramFlow
+
 class Workout {
-    - exercises : List<Exercisee>
-    - assignedDays : List<LocalDates>
+    - exercises : List<ExerciseId>
+    - dateCreated : LocalDate
+    - workoutFlow : WorkoutFlow
+}
+
+class WorkoutFlow {
+"\\defines sets, reps, weights for each exercises"
+"\\defines exerciseOrder, circuits, etc."
 }
 class Exercise {
     - name : String
@@ -95,6 +111,7 @@ class Exercise {
     - regression : Exercise
 }
 Program -- Workout
+Workout - WorkoutFlow
 Workout -- Exercise
 
 @enduml
